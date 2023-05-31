@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>하나 포트폴리오</title>
-  <script src="../src/script/report-button.js"></script>
-  <script src="../src/script/healthreport.js"></script>
 
   <style>
     @font-face {
@@ -53,9 +51,15 @@
 
     .title-container {
       display: flex;
-      flex: 1;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    h2 {
+      flex: 1;
+      text-align: center;
+      margin: 10px 0;
     }
 
     article {
@@ -69,6 +73,8 @@
 
     section {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* 중앙 정렬 */
     }
 
     article:nth-of-type(3) {
@@ -90,6 +96,17 @@
       font-size: 18px;
       line-height: 1.5;
     }
+
+    @media screen and (max-width: 600px) {
+      .title-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      article {
+        flex: 1 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -99,16 +116,22 @@
         <img src="images/hanawlogo.png" alt="로고 이미지">
       </div>
       <div class="title-container">
-        <h1>하나 포트폴리오</h1>
+        <h1>헬스케어 투자성과</h1>
       </div>
       <div class="blank"></div>
     </div>
   </header>
-  
   <section>
-
-
+    <article>
+      <h2>헬스케어 투자 이익</h2>
+      <canvas id="line-graph" width="1000" height="1000"></canvas>
+    </article>
+    <article>
+      <h2>헬스케어 투자 종목</h2>
+      <canvas id="pie-graph" width="1000" height="1000"></canvas>
+    </article>
   </section>
+  <script src="script/health-line.js"></script>
+  <script src="script/health-stock.js"></script>
 </body>
 </html>
-
