@@ -1,0 +1,7 @@
+[
+    {"stock": "존슨앤존슨", "percentage": 20, "value": 20000000},
+    {"stock": "바이엘", "percentage": 25, "value": 25000000},
+    {"stock": "셀트리온", "percentage": 15, "value": 15000000},
+    {"stock": "유나이티드헬스클럽", "percentage": 30, "value": 30000000},
+    {"stock": "난망했네", "percentage": 10, "value": 10000000}
+  ]
