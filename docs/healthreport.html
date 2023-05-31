@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>하나 포트폴리오</title>
+
+  <style>
+    @font-face {
+      font-family: 'HanawMediumFont';
+      src: url('../fonts/HANAW/Hana2-Medium.ttf') format('truetype');
+    }
+
+    html {
+      font-family: 'HanawMediumFont', sans-serif;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    header {
+      background: #00857e;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      line-height: 100px;
+      margin: 0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .logo-img {
+      margin-left: 10px;
+    }
+
+    .blank {
+      width: 161px;
+    }
+
+    .title-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    h2 {
+      flex: 1;
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    article {
+      padding: 10px;
+      margin: 10px;
+      background: whitesmoke;
+      flex: 1;
+    }
+
+    /* Add your flexbox CSS below here */
+
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* 중앙 정렬 */
+    }
+
+    article:nth-of-type(3) {
+      display: flex;
+      flex-flow: column;
+    }
+
+    article:nth-of-type(3) > div:first-child {
+      flex: 1 100px;
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    button {
+      flex: 1 auto;
+      margin: 5px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    @media screen and (max-width: 600px) {
+      .title-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      article {
+        flex: 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <div class="logo-img">
+        <img src="images/hanawlogo.png" alt="로고 이미지">
+      </div>
+      <div class="title-container">
+        <h1>헬스케어 투자성과</h1>
+      </div>
+      <div class="blank"></div>
+    </div>
+  </header>
+  <section>
+    <article>
+      <h2>헬스케어 투자 이익</h2>
+      <canvas id="line-graph" width="1000" height="1000"></canvas>
+    </article>
+    <article>
+      <h2>헬스케어 투자 종목</h2>
+      <canvas id="pie-graph" width="1000" height="1000"></canvas>
+    </article>
+  </section>
+  <script src="script/health-line.js"></script>
+  <script src="script/health-stock.js"></script>
+</body>
+</html>
