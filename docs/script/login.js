@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (isLoginSuccessful) {
       console.log('Login successful');
       // Redirect to the next page on successful login
-      window.location.href = 'chart.html';
+      window.location.assign('/chart.html');
     } else {
       console.log('Login failed');
       // Perform error handling for failed login
