@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>하나 포트폴리오</title>
+  <script src="../src/script/report-button.js"></script>
+  <script src="../src/script/healthreport.js"></script>
+
+  <style>
+    @font-face {
+      font-family: 'HanawMediumFont';
+      src: url('../fonts/HANAW/Hana2-Medium.ttf') format('truetype');
+    }
+
+    html {
+      font-family: 'HanawMediumFont', sans-serif;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    header {
+      background: #00857e;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      line-height: 100px;
+      margin: 0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .logo-img {
+      margin-left: 10px;
+    }
+
+    .blank {
+      width: 161px;
+    }
+
+    .title-container {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+    }
+
+    article {
+      padding: 10px;
+      margin: 10px;
+      background: whitesmoke;
+      flex: 1;
+    }
+
+    /* Add your flexbox CSS below here */
+
+    section {
+      display: flex;
+    }
+
+    article:nth-of-type(3) {
+      display: flex;
+      flex-flow: column;
+    }
+
+    article:nth-of-type(3) > div:first-child {
+      flex: 1 100px;
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    button {
+      flex: 1 auto;
+      margin: 5px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <div class="logo-img">
+        <img src="images/hanawlogo.png" alt="로고 이미지">
+      </div>
+      <div class="title-container">
+        <h1>하나 포트폴리오</h1>
+      </div>
+      <div class="blank"></div>
+    </div>
+  </header>
+  
+  <section>
+<article>
+  <div>
+    <div>
+      <div>
+        <div>
+          <span>🇺🇸</span>
+        </div>
+        <div>
+          <span>🔥</span>
+        </div>
+      </div>
+      <span>
+        <div style="display: contents; font-weight: normal;">
+          헬스케어 성장 집중 전략
+        </div>
+      </span>
+    </div>
+    <div>
+      <p>헬스케어 산업의 특징은 성장을 지속하는 것에 있습니다. 성장 모멘텀 스코어를 활용하여 수익률과 리스크를 동시에 개선한 전략입니다.</p>
+      <div>
+        <button cltabindex="0" type="button" class="report-button1">
+          <p>리포트 더보기</p>
+        </button>
+        <button tabindex="0" type="button" class="health-result">
+          <p>투자 성과 확인하기</p>
+        </button>
+      </div>
+    </div>
+  </div>
+</article>
+<article>
+  <div>
+    <div>
+      <div>
+        <span>🇰🇷</span>
+      </div>
+      <div>
+        <span>🔥</span>
+      </div>
+    </div>
+    <span>
+      <div style="display: contents; font-weight: normal;">
+        피터린치 중소형주 성장 집중 전략
+      </div>
+    </span>
+  </div>
+  <div>
+    <p>중소형주 특징인 자금유동성 리스크를 줄이고, 건강한 성장 지표로 매출 성장률에 집중하는 피터린치 스코어를 통해 대한민국 중소형주를 공략한 전략입니다. </p>
+    <div>
+      <button tabindex="0" type="button" class="report-button2">
+        <p>리포트 더보기</p>
+      </button>
+      <button tabindex="0" type="button">
+        <p>투자 성과 확인하기</p>
+      </button>
+    </div>
+  </div>
+  <p></p>
+</article>
+
+<article>
+  <div>
+    <div>
+      <div>
+        <span>🇰🇷</span>
+      </div>
+      <div>
+        <span>🔥</span>
+      </div>
+    </div>
+    <span>
+      <div style="display: contents; font-weight: normal;">
+        반도체 산업 수익 극대화 전략
+      </div>
+    </span>
+  </div>
+  <div>
+    <p>반도체 산업에 안정성으로 대표되는 배당을 기준으로, 부채비율이 적고 재무적으로 건강한 기업을 찾아 수익성을 극대화한 전략입니다.</p>
+    <div>
+      <button tabindex="0" type="button" class="report-button3">
+        <p>리포트 더보기</p>
+      </button>
+      <button tabindex="0" type="button">
+        <p>투자 성과 확인하기</p>
+      </button>
+    </div>
+  </div>
+  <div>
+    <p></p>
+  </div>
+  <div>
+    <p></p>
+  </div>
+</article>
+
+  </section>
+</body>
+</html>
+
