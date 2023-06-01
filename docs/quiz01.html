@@ -103,6 +103,15 @@
             row.addEventListener('dragover', function (event) {
                 event.preventDefault();
             });
+            row.addEventListener('dragend', function () {
+    selectedRows.forEach(selectedRow => {
+        selectedRow.classList.remove('dragging');
+        selectedRow.classList.remove('checked');
+        const checkbox = selectedRow.querySelector('input[type="checkbox"]');
+        checkbox.checked = false;
+    });
+    selectedRows = [];
+});
 
             row.addEventListener('drop', function (event) {
                 event.preventDefault();
@@ -125,6 +134,13 @@
                 selectedRows = [];
                 resetSelectAllCheckbox();
             });
+            row.addEventListener('dragend', function () {
+    selectedRows.forEach(selectedRow => {
+        selectedRow.classList.remove('dragging');
+        selectedRow.classList.remove('checked'); // 색상 제거
+    });
+    selectedRows = [];
+});
 
             row.addEventListener('dragend', function () {
                 selectedRows.forEach(selectedRow => selectedRow.classList.remove('dragging'));
