@@ -2,7 +2,7 @@
 function loadJSON(callback) {
     const xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', '../health-stock.json', true);
+    xobj.open('GET', '../src/health-stock.json', true);
     xobj.onreadystatechange = function() {
       if (xobj.readyState === 4 && xobj.status === 200) {
         callback(JSON.parse(xobj.responseText));

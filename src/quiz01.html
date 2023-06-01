@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #forumTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #forumTable tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        #forumTable tr.checked {
+            background-color: #ff0000;
+        }
+
+        .draggable {
+            cursor: move;
+        }
+
+        .dragging {
+            opacity: 0.5;
+        }
+
+        /* Added this line to center all text */
+        #forumTable, #pagination {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table id="forumTable">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAllCheckbox"></th>
+                <th>Id</th>
+                <th>타이틀</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be added here -->
+        </tbody>
+    </table>
+
+    <div id="pagination">
+        <!-- Pagination buttons will be added here -->
+    </div>
+
+    <script>
+        const pageSize = 10;
+        let currentPage = 1;
+        let data = [];
+        let selectedRows = [];
+
+        function createRow(item) {
+            const row = document.createElement('tr');
+
+            const selectCell = document.createElement('td');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    row.classList.add('checked');
+                    selectedRows.push(row);
+                } else {
+                    row.classList.remove('checked');
+                    selectedRows = selectedRows.filter(selectedRow => selectedRow !== row);
+                }
+            });
+            selectCell.appendChild(checkbox);
+            row.appendChild(selectCell);
+
+            const idCell = document.createElement('td');
+            idCell.textContent = item.Id;
+            row.appendChild(idCell);
+
+            const titleCell = document.createElement('td');
+            titleCell.textContent = item.타이틀;
+            row.appendChild(titleCell);
+
+            row.setAttribute('draggable', true);
+            row.classList.add('draggable');
+
+            row.addEventListener('dragstart', function (event) {
+                if (!this.classList.contains('checked')) {
+                    event.preventDefault();
+                    return;
+                }
+                const selectedHTML = selectedRows.map(selectedRow => selectedRow.outerHTML).join('');
+                event.dataTransfer.setData('text/html', selectedHTML);
+                selectedRows.forEach(selectedRow => selectedRow.classList.add('dragging'));
+            });
+
+            row.addEventListener('dragenter', function (event) {
+                event.preventDefault();
+                row.classList.add('dragover');
+            });
+
+            row.addEventListener('dragover', function (event) {
+                event.preventDefault();
+            });
+
+            row.addEventListener('drop', function (event) {
+                event.preventDefault();
+                row.classList.remove('dragover');
+                if (!selectedRows.length) return;
+                row.insertAdjacentHTML('beforebegin', event.dataTransfer.getData('text/html'));
+
+                const newRows = Array.from(row.parentNode.children).filter(child => child.classList.contains('dragging'));
+                newRows.forEach(newRow => {
+                    newRow.classList.remove('dragging');
+                    newRow.querySelector('input[type="checkbox"]').checked = false;
+                    newRow.classList.remove('checked');
+                    newRow.addEventListener('dragstart', row.ondragstart);
+                    newRow.addEventListener('dragenter', row.ondragenter);
+                    newRow.addEventListener('dragover', row.ondragover);
+                    newRow.addEventListener('drop', row.ondrop);
+                });
+
+                selectedRows.forEach(selectedRow => selectedRow.remove());
+                selectedRows = [];
+                resetSelectAllCheckbox();
+            });
+
+            row.addEventListener('dragend', function () {
+                selectedRows.forEach(selectedRow => selectedRow.classList.remove('dragging'));
+            });
+
+            return row;
+        }
+
+        function updateTable() {
+            const tableBody = document.querySelector("#forumTable tbody");
+            tableBody.innerHTML = '';
+
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = Math.min(startIndex + pageSize, data.length);
+
+            for (let i = startIndex; i < endIndex; i++) {
+                tableBody.appendChild(createRow(data[i]));
+            }
+        }
+
+        function updatePagination() {
+            const paginationDiv = document.querySelector("#pagination");
+            paginationDiv.innerHTML = '';
+
+            const numPages = Math.ceil(data.length / pageSize);
+
+            for (let i = 1; i <= numPages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.addEventListener('click', function () {
+                    currentPage = i;
+                    updateTable();
+                    resetSelectAllCheckbox();
+                });
+
+                paginationDiv.appendChild(button);
+            }
+        }
+
+        fetch('forum.json')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not OK');
+                }
+                return response.json();
+            })
+            .then((receivedData) => {
+                data = receivedData.map(item => ({
+                    Id: item.id,
+                    타이틀: item.title
+                }));
+
+                updateTable();
+                updatePagination();
+            })
+            .catch((error) => {
+                console.log('Error:', error);
+            });
+
+        const selectAllCheckbox = document.querySelector('#selectAllCheckbox');
+        selectAllCheckbox.addEventListener('change', function () {
+            const checkboxes = document.querySelectorAll('#forumTable tbody input[type="checkbox"]');
+            selectedRows = [];
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+
+                const row = checkbox.parentNode.parentNode;
+                if (checkbox.checked) {
+                    row.classList.add('checked');
+                    selectedRows.push(row);
+                } else {
+                    row.classList.remove('checked');
+                }
+            });
+        });
+
+        function resetSelectAllCheckbox() {
+            selectAllCheckbox.checked = false;
+        }
+    </script>
+</body>
+</html>
